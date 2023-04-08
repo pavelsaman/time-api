@@ -1,0 +1,14 @@
+package utils
+
+import (
+	"encoding/json"
+	"net/http"
+
+	"github.com/pavelsaman/time-api/types"
+)
+
+func SendApiError(w http.ResponseWriter, err *types.ApiError) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(err.ErrorCode)
+	json.NewEncoder(w).Encode(err)
+}
