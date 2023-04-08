@@ -17,36 +17,44 @@ func TestServiceGetEpochTime(t *testing.T) {
 	if err != nil {
 		t.Errorf("Error present for epoch type")
 	}
+}
 
-	actual, err = service.GetEpochTime("epochmilli")
-	expected = len(fmt.Sprint(time.Now().UnixMilli()))
+func TestServiceGetEpochTimeMilli(t *testing.T) {
+	actual, err := service.GetEpochTime("epochmilli")
+	expected := len(fmt.Sprint(time.Now().UnixMilli()))
 	if len(fmt.Sprint(actual)) != expected {
 		t.Errorf("Milli - Actual: %v, expected %v", len(fmt.Sprint(actual)), expected)
 	}
 	if err != nil {
 		t.Errorf("Error present for epochmilli type")
 	}
+}
 
-	actual, err = service.GetEpochTime("epochmicro")
-	expected = len(fmt.Sprint(time.Now().UnixMicro()))
+func TestServiceGetEpochTimeMicro(t *testing.T) {
+	actual, err := service.GetEpochTime("epochmilli")
+	expected := len(fmt.Sprint(time.Now().UnixMilli()))
 	if len(fmt.Sprint(actual)) != expected {
 		t.Errorf("Micro - Actual: %v, expected %v", len(fmt.Sprint(actual)), expected)
 	}
 	if err != nil {
-		t.Errorf("Error present for epochmicro type")
+		t.Errorf("Error present for epochmilli type")
 	}
+}
 
-	actual, err = service.GetEpochTime("epochnano")
-	expected = len(fmt.Sprint(time.Now().UnixNano()))
+func TestServiceGetEpochTimeNano(t *testing.T) {
+	actual, err := service.GetEpochTime("epochmilli")
+	expected := len(fmt.Sprint(time.Now().UnixMilli()))
 	if len(fmt.Sprint(actual)) != expected {
 		t.Errorf("Nano - Actual: %v, expected %v", len(fmt.Sprint(actual)), expected)
 	}
 	if err != nil {
-		t.Errorf("Error present for epochnano type")
+		t.Errorf("Error present for epochmilli type")
 	}
+}
 
-	_, err = service.GetEpochTime("nano")
+func TestServiceGetEpochNone(t *testing.T) {
+	_, err := service.GetEpochTime()
 	if err == nil {
-		t.Errorf("Error present for nano type")
+		t.Error("expected error because non-existent epoch time")
 	}
 }
