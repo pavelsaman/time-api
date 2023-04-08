@@ -1,6 +1,6 @@
 package types
 
-type EpochTimeResponse struct {
+type EpochAndUtcTimeResponse struct {
 	Type  string `json:"type"`
 	Epoch string `json:"epoch"`
 	Utc   string `json:"utc"`
@@ -11,7 +11,7 @@ type EpochToUtcTimeResponse struct {
 	EpochType string `json:"epochType"`
 }
 
-type ApiError struct {
+type ApiErrorResponse struct {
 	ErrorCode    int    `json:"errorCode"`
 	ErrorMessage string `json:"errorMessage"`
 }

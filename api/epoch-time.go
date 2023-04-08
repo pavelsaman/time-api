@@ -14,12 +14,12 @@ import (
 func GetEpochTime(w http.ResponseWriter, r *http.Request) {
 	epochTime, err := service.GetEpochTime(mux.Vars(r)["epochType"])
 	if err != nil {
-		api_utils.SendApiError(w, &types.ApiError{
+		api_utils.SendApiError(w, &types.ApiErrorResponse{
 			ErrorCode:    400,
 			ErrorMessage: err.Error(),
 		})
 	} else {
-		json.NewEncoder(w).Encode(types.EpochTimeResponse{
+		json.NewEncoder(w).Encode(types.EpochAndUtcTimeResponse{
 			Type:  epochTime.Type,
 			Epoch: fmt.Sprint(epochTime.Epoch),
 			Utc:   fmt.Sprint(epochTime.Utc),
@@ -30,7 +30,7 @@ func GetEpochTime(w http.ResponseWriter, r *http.Request) {
 func GetEpochToUtc(w http.ResponseWriter, r *http.Request) {
 	utc, err := service.GetEpochToUtc(mux.Vars(r)["epochValue"])
 	if err != nil {
-		api_utils.SendApiError(w, &types.ApiError{
+		api_utils.SendApiError(w, &types.ApiErrorResponse{
 			ErrorCode:    400,
 			ErrorMessage: "Invalid epoch time in path parameter",
 		})
