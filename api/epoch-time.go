@@ -32,7 +32,7 @@ func GetEpochToUtc(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		api_utils.SendApiError(w, &types.ApiErrorResponse{
 			ErrorCode:    400,
-			ErrorMessage: "Invalid epoch time in path parameter",
+			ErrorMessage: err.Error(),
 		})
 	} else {
 		json.NewEncoder(w).Encode(types.EpochToUtcTimeResponse{
