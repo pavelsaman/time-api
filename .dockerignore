@@ -1,0 +1,6 @@
+.vscode/
+bin/
+tests/
+
+.gitignore
+*_test.go
