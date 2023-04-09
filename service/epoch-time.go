@@ -77,17 +77,17 @@ func GetEpochToUtc(epochValue string) (*types.EpochToUtcTime, error) {
 
 	var t time.Time
 	var et string
-	switch len(epochValue) {
-	case epoch:
+	switch {
+	case len(epochValue) < epochMilli:
 		t = time.Unix(epochTime, 0)
 		et = "epoch"
-	case epochMilli:
+	case len(epochValue) < epochMicro:
 		t = time.UnixMilli(epochTime)
 		et = "epochmilli"
-	case epochMicro:
+	case len(epochValue) < epochNano:
 		t = time.UnixMicro(epochTime)
 		et = "epochmicro"
-	case epochNano:
+	case len(epochValue) == epochNano:
 		t = time.Unix(0, epochTime)
 		et = "epochnano"
 	default:

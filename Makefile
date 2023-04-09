@@ -8,7 +8,7 @@ run: build
 	./bin/time-api
 
 test:
-	go test -count=1 ./tests/...
+	go test -count=1 ./tests/api ./tests/service
 
 test-api:
 	go test -count=1 ./tests/api
