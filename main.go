@@ -13,8 +13,11 @@ import (
 
 func registerHandlers(router *mux.Router) {
 	router.HandleFunc("/"+config.ApiVersion()+"/version", controllers.GetVersion).Methods("GET")
-	router.HandleFunc("/"+config.ApiVersion()+"/time/{epochType}", controllers.GetEpochTime).Methods("GET")
-	router.HandleFunc("/"+config.ApiVersion()+"/time/epoch/{epochValue}", controllers.GetEpochToUtc).Methods("GET")
+	// epoch
+	router.HandleFunc("/"+config.ApiVersion()+"/unix/{epochType}", controllers.GetEpochTime).Methods("GET")
+	router.HandleFunc("/"+config.ApiVersion()+"/unix/epoch/{epochValue}", controllers.GetEpochToUtc).Methods("GET")
+	// utc
+	router.HandleFunc("/"+config.ApiVersion()+"/time/utc", controllers.GetUtcTime).Methods("GET")
 }
 
 func main() {

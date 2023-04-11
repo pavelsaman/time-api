@@ -1,23 +1,13 @@
 package test_utils
 
 import (
-	"net/http"
 	"net/http/httptest"
 
 	"github.com/gorilla/mux"
+	test_types "github.com/pavelsaman/time-api/tests/api/types"
 )
 
-type Handler struct {
-	Url     string
-	Func    func(http.ResponseWriter, *http.Request)
-	Methods []string
-}
-
-type Handlers struct {
-	Handlers []*Handler
-}
-
-func StartTestServerAndRegisterHandlers(handlers *Handlers) *httptest.Server {
+func StartTestServerAndRegisterHandlers(handlers *test_types.Handlers) *httptest.Server {
 	router := mux.NewRouter()
 
 	for _, handler := range handlers.Handlers {

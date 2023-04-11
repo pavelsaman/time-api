@@ -11,6 +11,11 @@ type EpochToUtcTimeResponse struct {
 	EpochType string `json:"epochType"`
 }
 
+type UtcTimeResponse struct {
+	Type string `json:"type"`
+	Utc  string `json:"utc"`
+}
+
 type ApiErrorResponse struct {
 	ErrorCode    int    `json:"errorCode"`
 	ErrorMessage string `json:"errorMessage"`
