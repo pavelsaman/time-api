@@ -1,9 +1,21 @@
 package config
 
-import "os"
+import (
+	"fmt"
+	"os"
+
+	"github.com/joho/godotenv"
+)
 
 var defaultVersion string = "v1"
 var defaultPort string = ":8080"
+
+func init() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "Error loading .env file")
+	}
+}
 
 func ApiVersion() string {
 	if apiVersion := os.Getenv("API_VERSION"); apiVersion != "" {
