@@ -1,5 +1,5 @@
-ARG API_PORT=8080
 FROM golang:latest
+ARG API_PORT=8080
 
 WORKDIR /time-api
 
