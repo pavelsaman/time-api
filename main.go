@@ -11,11 +11,9 @@ import (
 	"github.com/pavelsaman/time-api/middleware"
 )
 
-
-
 func registerHandlers(router *mux.Router) {
 	for _, endpoint := range controllers.Endpoints {
-		router.HandleFunc(endpoint.Url, endpoint.Func).Methods(endpoint.Methods...)	
+		router.HandleFunc(endpoint.Url, endpoint.Func).Methods(endpoint.Methods...)
 	}
 }
 
