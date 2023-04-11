@@ -1,3 +1,5 @@
+.PHONY: format build run test test-api test-service
+
 format:
 	go fmt ./...
 
