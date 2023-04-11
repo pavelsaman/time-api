@@ -14,7 +14,7 @@ import (
 func GetEpochTime(w http.ResponseWriter, r *http.Request) {
 	epochTime, err := service.GetEpochTime(mux.Vars(r)["epochType"])
 	if err != nil {
-		api_utils.SendApiError(w, &types.ApiErrorResponse{
+		api_utils.SendApiError(&w, &types.ApiErrorResponse{
 			ErrorCode:    400,
 			ErrorMessage: err.Error(),
 		})
@@ -30,7 +30,7 @@ func GetEpochTime(w http.ResponseWriter, r *http.Request) {
 func GetEpochToUtc(w http.ResponseWriter, r *http.Request) {
 	utc, err := service.GetEpochToUtc(mux.Vars(r)["epochValue"])
 	if err != nil {
-		api_utils.SendApiError(w, &types.ApiErrorResponse{
+		api_utils.SendApiError(&w, &types.ApiErrorResponse{
 			ErrorCode:    400,
 			ErrorMessage: err.Error(),
 		})
