@@ -6,7 +6,6 @@ import (
 	"testing"
 
 	"github.com/pavelsaman/time-api/api/controllers"
-	"github.com/pavelsaman/time-api/config"
 	test_types "github.com/pavelsaman/time-api/tests/api/types"
 	test_utils "github.com/pavelsaman/time-api/tests/api/utils"
 )
@@ -14,25 +13,15 @@ import (
 var testServer *httptest.Server
 
 func TestMain(m *testing.M) {
-	testServer = test_utils.StartTestServerAndRegisterHandlers(&test_types.Handlers{
-		Handlers: []*test_types.Handler{
-			{
-				Url:     "/" + config.ApiVersion() + "/unix/{epochType}",
-				Func:    controllers.GetEpochTime,
-				Methods: []string{"GET"},
-			},
-			{
-				Url:     "/" + config.ApiVersion() + "/unix/epoch/{epochValue}",
-				Func:    controllers.GetEpochTime,
-				Methods: []string{"GET"},
-			},
-			{
-				Url:     "/" + config.ApiVersion() + "/time/utc",
-				Func:    controllers.GetUtcTime,
-				Methods: []string{"GET"},
-			},
-		},
-	})
+	var handlers test_types.Handlers
+	for _, endpoint := range controllers.Endpoints {
+		handlers.Handlers = append(handlers.Handlers, &test_types.Handler{
+			Url:     endpoint.Url,
+			Func:    endpoint.Func,
+			Methods: endpoint.Methods,
+		})
+	}
+	testServer = test_utils.StartTestServerAndRegisterHandlers(&handlers)
 	defer testServer.Close()
 
 	exitCode := m.Run()

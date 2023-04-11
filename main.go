@@ -11,13 +11,12 @@ import (
 	"github.com/pavelsaman/time-api/middleware"
 )
 
+
+
 func registerHandlers(router *mux.Router) {
-	router.HandleFunc("/"+config.ApiVersion()+"/version", controllers.GetVersion).Methods("GET")
-	// epoch
-	router.HandleFunc("/"+config.ApiVersion()+"/unix/{epochType}", controllers.GetEpochTime).Methods("GET")
-	router.HandleFunc("/"+config.ApiVersion()+"/unix/epoch/{epochValue}", controllers.GetEpochToUtc).Methods("GET")
-	// utc
-	router.HandleFunc("/"+config.ApiVersion()+"/time/utc", controllers.GetUtcTime).Methods("GET")
+	for _, endpoint := range controllers.Endpoints {
+		router.HandleFunc(endpoint.Url, endpoint.Func).Methods(endpoint.Methods...)	
+	}
 }
 
 func main() {
