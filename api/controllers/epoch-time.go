@@ -1,4 +1,4 @@
-package api
+package controllers
 
 import (
 	"encoding/json"
@@ -6,15 +6,15 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	api_utils "github.com/pavelsaman/time-api/api/utils"
-	"github.com/pavelsaman/time-api/service"
-	"github.com/pavelsaman/time-api/types"
+	"github.com/pavelsaman/time-api/api/services"
+	"github.com/pavelsaman/time-api/api/types"
+	"github.com/pavelsaman/time-api/api/utils"
 )
 
 func GetEpochTime(w http.ResponseWriter, r *http.Request) {
-	epochTime, err := service.GetEpochTime(mux.Vars(r)["epochType"])
+	epochTime, err := services.GetEpochTime(mux.Vars(r)["epochType"])
 	if err != nil {
-		api_utils.SendApiError(&w, &types.ApiErrorResponse{
+		utils.SendApiError(&w, &types.ApiErrorResponse{
 			ErrorCode:    400,
 			ErrorMessage: err.Error(),
 		})
@@ -28,9 +28,9 @@ func GetEpochTime(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetEpochToUtc(w http.ResponseWriter, r *http.Request) {
-	utc, err := service.GetEpochToUtc(mux.Vars(r)["epochValue"])
+	utc, err := services.GetEpochToUtc(mux.Vars(r)["epochValue"])
 	if err != nil {
-		api_utils.SendApiError(&w, &types.ApiErrorResponse{
+		utils.SendApiError(&w, &types.ApiErrorResponse{
 			ErrorCode:    400,
 			ErrorMessage: err.Error(),
 		})

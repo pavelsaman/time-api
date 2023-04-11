@@ -1,4 +1,4 @@
-package api_test_utils
+package test_utils
 
 import (
 	"net/http"

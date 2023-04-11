@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/pavelsaman/time-api/types"
+	"github.com/pavelsaman/time-api/api/types"
 )
 
 func SendApiError(w *http.ResponseWriter, err *types.ApiErrorResponse) {

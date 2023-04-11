@@ -1,4 +1,4 @@
-package service
+package services
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pavelsaman/time-api/types"
+	"github.com/pavelsaman/time-api/api/types"
 )
 
 func GetEpochTime(epochType ...string) (*types.EpochAndUtcTime, error) {

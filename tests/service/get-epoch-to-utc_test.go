@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/pavelsaman/time-api/service"
-	"github.com/pavelsaman/time-api/types"
+	"github.com/pavelsaman/time-api/api/services"
+	"github.com/pavelsaman/time-api/api/types"
 )
 
 func TestServiceGetUtcTime(t *testing.T) {
@@ -30,7 +30,7 @@ func TestServiceGetUtcTime(t *testing.T) {
 	}
 
 	for epoch, utc := range epochToUtc {
-		actual, err := service.GetEpochToUtc(fmt.Sprint(epoch))
+		actual, err := services.GetEpochToUtc(fmt.Sprint(epoch))
 		if err != nil {
 			t.Errorf("Epoch %v cannot be converted to utc", epoch)
 		}
@@ -45,7 +45,7 @@ func TestServiceGetUtcTime(t *testing.T) {
 }
 
 func TestServiceCorrectTimeForEpochZero(t *testing.T) {
-	actual, err := service.GetEpochToUtc("0")
+	actual, err := services.GetEpochToUtc("0")
 	if err != nil {
 		t.Errorf("Epoch %v cannot be converted to utc", 0)
 	}
@@ -60,7 +60,7 @@ func TestServiceCorrectTimeForEpochZero(t *testing.T) {
 }
 
 func TestServiceNegativeEpoch(t *testing.T) {
-	actual, err := service.GetEpochToUtc("-12")
+	actual, err := services.GetEpochToUtc("-12")
 	if err != nil {
 		t.Errorf("Epoch %v cannot be converted to utc", 0)
 	}
@@ -75,7 +75,7 @@ func TestServiceNegativeEpoch(t *testing.T) {
 }
 
 func TestServiceOverflowSignedInt64Bit(t *testing.T) {
-	actual, err := service.GetEpochToUtc("9223372036854775808")
+	actual, err := services.GetEpochToUtc("9223372036854775808")
 	if err == nil {
 		t.Error("No error when one expected")
 	}
@@ -88,7 +88,7 @@ func TestServiceOverflowSignedInt64Bit(t *testing.T) {
 }
 
 func TestServiceTextualInput(t *testing.T) {
-	actual, err := service.GetEpochToUtc("a")
+	actual, err := services.GetEpochToUtc("a")
 	if err == nil {
 		t.Error("No error when one expected")
 	}

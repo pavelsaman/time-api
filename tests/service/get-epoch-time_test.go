@@ -5,11 +5,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/pavelsaman/time-api/service"
+	"github.com/pavelsaman/time-api/api/services"
 )
 
 func TestServiceGetEpochTime(t *testing.T) {
-	actual, err := service.GetEpochTime("epoch")
+	actual, err := services.GetEpochTime("epoch")
 	expected := len(fmt.Sprint(time.Now().UTC().Unix()))
 	if len(fmt.Sprint(actual.Epoch)) != expected {
 		t.Errorf("Actual: %v, expected %v", len(fmt.Sprint(actual.Epoch)), expected)
@@ -23,7 +23,7 @@ func TestServiceGetEpochTime(t *testing.T) {
 }
 
 func TestServiceGetEpochTimeMilli(t *testing.T) {
-	actual, err := service.GetEpochTime("epochmilli")
+	actual, err := services.GetEpochTime("epochmilli")
 	expected := len(fmt.Sprint(time.Now().UnixMilli()))
 	if len(fmt.Sprint(actual.Epoch)) != expected {
 		t.Errorf("Milli - Actual: %v, expected %v", len(fmt.Sprint(actual.Epoch)), expected)
@@ -37,7 +37,7 @@ func TestServiceGetEpochTimeMilli(t *testing.T) {
 }
 
 func TestServiceGetEpochTimeMicro(t *testing.T) {
-	actual, err := service.GetEpochTime("epochmicro")
+	actual, err := services.GetEpochTime("epochmicro")
 	expected := len(fmt.Sprint(time.Now().UnixMicro()))
 	if len(fmt.Sprint(actual.Epoch)) != expected {
 		t.Errorf("Micro - Actual: %v, expected %v", len(fmt.Sprint(actual.Epoch)), expected)
@@ -51,7 +51,7 @@ func TestServiceGetEpochTimeMicro(t *testing.T) {
 }
 
 func TestServiceGetEpochTimeNano(t *testing.T) {
-	actual, err := service.GetEpochTime("epochnano")
+	actual, err := services.GetEpochTime("epochnano")
 	expected := len(fmt.Sprint(time.Now().UnixNano()))
 	if len(fmt.Sprint(actual.Epoch)) != expected {
 		t.Errorf("Nano - Actual: %v, expected %v", len(fmt.Sprint(actual.Epoch)), expected)
@@ -65,14 +65,14 @@ func TestServiceGetEpochTimeNano(t *testing.T) {
 }
 
 func TestServiceGetEpochNone(t *testing.T) {
-	_, err := service.GetEpochTime()
+	_, err := services.GetEpochTime()
 	if err == nil {
 		t.Error("expected error because non-existent epoch time")
 	}
 }
 
 func TestServiceGetEpochTimeCanUseCamelCase(t *testing.T) {
-	_, err := service.GetEpochTime("epochMilli")
+	_, err := services.GetEpochTime("epochMilli")
 	if err != nil {
 		t.Errorf("cannot use camelCase in epoch type")
 	}

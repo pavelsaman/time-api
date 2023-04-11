@@ -8,19 +8,19 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/pavelsaman/time-api/api"
+	"github.com/pavelsaman/time-api/api/controllers"
 	"github.com/pavelsaman/time-api/config"
-	api_test_utils "github.com/pavelsaman/time-api/tests/api/utils"
+	test_utils "github.com/pavelsaman/time-api/tests/api/utils"
 )
 
 var testServer *httptest.Server
 
 func TestMain(m *testing.M) {
-	testServer = api_test_utils.StartTestServerAndRegisterHandlers(&api_test_utils.Handlers{
-		Handlers: []*api_test_utils.Handler{
+	testServer = test_utils.StartTestServerAndRegisterHandlers(&test_utils.Handlers{
+		Handlers: []*test_utils.Handler{
 			{
 				Url:     "/" + config.ApiVersion() + "/time/{epochType}",
-				Func:    api.GetEpochTime,
+				Func:    controllers.GetEpochTime,
 				Methods: []string{"GET"},
 			},
 		},
