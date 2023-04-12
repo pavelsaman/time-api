@@ -25,5 +25,5 @@ func (cl ConsoleLogger) Warn(format string, v ...any) {
 }
 
 func (cl ConsoleLogger) Error(format string, v ...any) {
-	fmt.Fprintf(os.Stdout, red+"ERROR"+end+" ("+logger_utils.FormatUTCTime()+"): "+format, v...)
+	fmt.Fprintf(os.Stderr, red+"ERROR"+end+" ("+logger_utils.FormatUTCTime()+"): "+format, v...)
 }
