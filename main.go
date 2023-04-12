@@ -20,6 +20,7 @@ func registerHandlers(router *mux.Router) {
 func main() {
 	router := mux.NewRouter()
 	router.Use(middleware.LogRequest)
+	router.Use(middleware.LogResponses)
 	registerHandlers(router)
 
 	fmt.Printf("Api version: %v, starting listening on port %v\n", config.ApiVersion(), config.ApiPort())
