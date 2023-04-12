@@ -1,7 +1,9 @@
 package logger_interface
 
+import "io"
+
 type Logger interface {
-	Info(message string, v ...any)
-	Warn(message string, v ...any)
-	Error(message string, v ...any)
+	Info(writer io.Writer, message string, v ...any)
+	Warn(writer io.Writer, message string, v ...any)
+	Error(writer io.Writer, message string, v ...any)
 }
