@@ -1,4 +1,4 @@
-.PHONY: format build run serve test test-api test-service
+.PHONY: format build run serve test test-api test-service test-middleware
 
 format:
 	go fmt ./...
@@ -12,10 +12,13 @@ run: build
 serve: run
 
 test:
-	go test -count=1 ./api/controllers ./api/services
+	go test -count=1 ./api/... ./middleware/...
 
 test-api:
 	go test -count=1 ./api/controllers
 
 test-service:
 	go test -count=1 ./api/services
+
+test-middleware:
+	go test -count=1 ./middleware/...
