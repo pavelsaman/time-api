@@ -1,5 +1,7 @@
 package types
 
+import "net/http"
+
 type EpochAndUtcTimeResponse struct {
 	Type  string `json:"type"`
 	Epoch string `json:"epoch"`
@@ -19,4 +21,14 @@ type UtcTimeResponse struct {
 type ApiErrorResponse struct {
 	ErrorCode    int    `json:"errorCode"`
 	ErrorMessage string `json:"errorMessage"`
+}
+
+type Handler struct {
+	Url     string
+	Func    func(http.ResponseWriter, *http.Request)
+	Methods []string
+}
+
+type Handlers struct {
+	Handlers []*Handler
 }

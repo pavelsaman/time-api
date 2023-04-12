@@ -12,10 +12,10 @@ run: build
 serve: run
 
 test:
-	go test -count=1 ./tests/api ./tests/service
+	go test -count=1 ./api/controllers ./api/services
 
 test-api:
-	go test -count=1 ./tests/api
+	go test -count=1 ./api/controllers
 
 test-service:
-	go test -count=1 ./tests/service
+	go test -count=1 ./api/services
