@@ -1,4 +1,4 @@
-.PHONY: format build run serve test test-api test-service test-middleware
+.PHONY: format build run serve test test-api test-service test-middleware coverage errcheck
 
 format:
 	go fmt ./...
@@ -25,3 +25,6 @@ test-middleware:
 
 coverage:
 	go test -cover ./...
+
+errcheck:
+	errcheck ./...
