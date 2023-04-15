@@ -22,3 +22,6 @@ test-service:
 
 test-middleware:
 	go test -count=1 ./middleware/...
+
+coverage:
+	go test -cover ./...

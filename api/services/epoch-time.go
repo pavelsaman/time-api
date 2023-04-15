@@ -1,12 +1,19 @@
 package services
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
 	"strings"
 	"time"
 
 	"github.com/pavelsaman/time-api/api/types"
+)
+
+var (
+	errUnknownEpochType   = errors.New("epoch type does not exist")
+	errUnknownEpoch       = errors.New("unknown epoch")
+	errCannotConvertEpoch = errors.New("cannot convert epoch")
 )
 
 func GetEpochTime(epochType ...string) (*types.EpochAndUtcTime, error) {
@@ -58,7 +65,7 @@ func GetEpochTime(epochType ...string) (*types.EpochAndUtcTime, error) {
 			Utc:   utc.Utc,
 		}, nil
 	default:
-		return nil, fmt.Errorf("epoch type \"%v\" does not exist", et)
+		return nil, errUnknownEpochType
 	}
 }
 
@@ -72,7 +79,7 @@ func GetEpochToUtc(epochValue string) (*types.EpochToUtcTime, error) {
 
 	epochTime, err := strconv.ParseInt(epochValue, 10, 64)
 	if err != nil {
-		return nil, fmt.Errorf("cannot convert epoch")
+		return nil, errCannotConvertEpoch
 	}
 
 	var t time.Time
@@ -91,7 +98,7 @@ func GetEpochToUtc(epochValue string) (*types.EpochToUtcTime, error) {
 		t = time.Unix(0, epochTime)
 		et = "epochnano"
 	default:
-		return nil, fmt.Errorf("unknown epoch")
+		return nil, errUnknownEpoch
 	}
 
 	return &types.EpochToUtcTime{
